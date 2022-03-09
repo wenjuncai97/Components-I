@@ -87,6 +87,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Nathan\'s Test Object',
+    date: 'March 9, 2022',
+    firstParagraph: 'aaaaaaaaaaaaaaaa',
+    secondParagraph: 'bbbbbbbbbbbb',
+    thirdParagraph: 'ccccccccccc'
   }
 ];
 
@@ -99,7 +106,7 @@ const data = [
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
 
-    {three separate paragraph elements}
+    <p></p><p></p><p></p>
 
     <span class="expandButton">+</span>
   </div>
@@ -115,3 +122,44 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+//Step 1:
+const articles = document.querySelector('.articles')
+
+function articleMaker(article) {
+  const newArt = document.createElement('div');
+  const title = document.createElement('h2');
+  const date = document.createElement('p');
+  const firstP = document.createElement('p');
+  const secondP = document.createElement('p');
+  const thirdP = document.createElement('p');
+  const span = document.createElement('button');
+
+  newArt.appendChild(title);
+  newArt.appendChild(date);
+  newArt.appendChild(firstP);
+  newArt.appendChild(secondP);
+  newArt.appendChild(thirdP);
+  newArt.appendChild(span);
+
+  newArt.classList.add('article');
+  date.classList.add('date');
+  span.classList.add('expandButton');
+
+  title.textContent = article.title;
+  date.textContent = article.date;
+  firstP.textContent = article.firstParagraph;
+  secondP.textContent = article.secondParagraph;
+  thirdP.textContent = article.thirdParagraph;
+  span.textContent = "+";
+
+  span.addEventListener("click", () => {
+    newArt.classList.toggle('article-open');
+  })
+  return newArt;
+}
+
+data.forEach(elem => {
+  const artOne = articleMaker(elem);
+  articles.appendChild(artOne);
+});
